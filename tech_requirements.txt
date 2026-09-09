@@ -1,0 +1,25 @@
+TECHNICAL REQUIREMENTS (SHORT)
+
+FRONTEND (React):
+1. Stack: React.js (JavaScript/JSX) with Vite for fast builds and Tailwind CSS for responsive styling.
+2. Pages: Responsive Homepage (Hero, Featured listings, Categories, Footer) and Internship Page.
+3. Features: Dynamic search bar, multi-criteria filters (category, location, work mode), and detail modal.
+4. Communication: React Router DOM for page routing and Axios/Fetch client for REST API requests.
+
+BACKEND (Node.js):
+1. Stack: Node.js runtime with Express.js web framework written in JavaScript (ES6+).
+2. Architecture: REST API architecture with modular routes, controllers, and error handling middleware.
+3. Database Integration: mysql2 library using connection pooling for secure and performant SQL queries.
+4. Core Endpoints: Serves categories, filtered internships, single listing details, and application submits.
+
+DATABASE (MySQL):
+1. Engine: MySQL 8.0 relational database with InnoDB storage engine and foreign key constraints.
+2. Tables: categories, companies, internships (with remote/hybrid/on-site enum), and applications.
+3. Relationships: One-to-Many relations between companies/categories and their associated internships.
+4. Persistence: Managed via Docker persistent named volumes with automated init.sql schema loading.
+
+DEVOPS (Docker):
+1. Orchestration: Docker Compose managing multi-container setup for client, server, and mysql_db.
+2. Client Container: Serves React frontend on port 5173 with hot-module replacement volume sync.
+3. Server Container: Runs Node.js Express API on port 5000 linked to the database container network.
+4. Database Container: Runs MySQL on port 3306 with environment-based credentials and volume mapping.
