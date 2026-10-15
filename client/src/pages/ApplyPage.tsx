@@ -229,11 +229,7 @@ export const ApplyPage: React.FC = () => {
         {/* Top Header Bar */}
         <div className="flex items-center justify-between pb-2 border-b border-slate-200">
           <div className="flex items-center gap-3">
-            <Link to="/" className="cursor-pointer">
-              <img src="/MAINSTAY_Logo.jpg" alt="Mainstay Logo" className="h-8 w-auto" />
-            </Link>
-            <span className="text-slate-300">|</span>
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+            <span className="text-sm font-bold text-[#204f32] uppercase tracking-wider">
               Application Portal
             </span>
           </div>
