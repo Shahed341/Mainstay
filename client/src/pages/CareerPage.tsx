@@ -12,7 +12,8 @@ import { Category, Internship, InternshipFilters } from '../types';
 import { PageContainer, PageHero } from '../components/PageTemplate';
 import { FilterBar } from '../components/FilterBar';
 import { InternshipCard } from '../components/InternshipCard';
-import { Loader2, Briefcase, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
+import { JobListSkeleton } from '../components/SkeletonLoader';
 
 interface CareerPageProps {
   categories: Category[];
@@ -73,16 +74,15 @@ export const CareerPage: React.FC<CareerPageProps> = ({
         highlightedTitle="Next Opportunity?"
         subtitle={
           <span>
-            Join <strong className="font-bold text-[#204f32]">The Lineup</strong> to create or update your profile and be considered for upcoming and current opportunities listed below.
+            Browse our current openings and find the perfect role. We're hiring across engineering, project management, and field operations.
           </span>
         }
         backgroundImage="/Recruitment_Spotlight.jpg"
         primaryAction={{
-          label: 'The Lineup',
+          label: 'Browse All Positions',
           onClick: () => {
-            if (internships.length > 0) {
-              onApplyInternship(internships[0]);
-            }
+            onResetFilters();
+            window.scrollTo({ top: 400, behavior: 'smooth' });
           }
         }}
       />
@@ -98,10 +98,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({
 
       {/* 3. Main List Content (Vertical Stack of Horizontal Boxes) */}
       {isLoading ? (
-        <div className="py-24 flex flex-col items-center justify-center text-slate-400">
-          <Loader2 className="w-8 h-8 animate-spin text-[#204f32] mb-3" />
-          <p className="text-sm text-[#204f32] font-medium">Fetching student opportunities...</p>
-        </div>
+        <JobListSkeleton count={6} />
       ) : internships.length === 0 ? (
         <div className="text-center py-16 bg-white rounded-lg border border-slate-200 p-8 shadow-xs">
           <div className="w-12 h-12 bg-[#f2f7f4] text-[#204f32] rounded-xl flex items-center justify-center mx-auto mb-3 border border-[#c4ded0]">

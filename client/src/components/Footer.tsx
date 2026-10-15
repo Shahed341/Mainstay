@@ -10,7 +10,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Linkedin, Mail } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onContactClick?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
   return (
     <footer className="bg-[#0b1a11] text-slate-300 text-sm border-t border-[#183b26]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -57,7 +61,7 @@ export const Footer: React.FC = () => {
               <li><a href="/#projects" className="hover:text-[#99c5b0] transition-colors">Projects</a></li>
               <li><Link to="/about" className="hover:text-[#99c5b0] transition-colors">About</Link></li>
               <li><Link to="/careers" className="hover:text-[#99c5b0] transition-colors">Careers</Link></li>
-              <li><a href="/#contact" className="hover:text-[#99c5b0] transition-colors">Contact</a></li>
+              <li><button onClick={onContactClick} className="hover:text-[#99c5b0] transition-colors">Contact</button></li>
             </ul>
           </div>
 

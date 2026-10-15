@@ -9,6 +9,7 @@
 import React, { useState } from 'react';
 import { Category, InternshipFilters } from '../types';
 import { Search, GraduationCap, SlidersHorizontal, X, RotateCcw } from 'lucide-react';
+import { MOCK_COMPANIES } from '../data/mockData';
 
 interface FilterBarProps {
   categories: Category[];
@@ -109,10 +110,11 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-slate-800 focus:outline-none focus:border-[#204f32] cursor-pointer"
               >
                 <option value="all">All Companies</option>
-                <option value="Orano">Orano Canada (Featured)</option>
-                <option value="TechCorp">TechCorp Labs</option>
-                <option value="Nova Digital">Nova Digital Systems</option>
-                <option value="CloudScale">CloudScale Systems</option>
+                {MOCK_COMPANIES.map((company) => (
+                  <option key={company.id} value={company.name}>
+                    {company.name}
+                  </option>
+                ))}
               </select>
             </div>
 

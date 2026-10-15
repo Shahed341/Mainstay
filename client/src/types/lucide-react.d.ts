@@ -55,4 +55,6 @@ declare module 'lucide-react' {
   export const ShieldCheck: Icon;
   export const Factory: Icon;
   export const Quote: Icon;
+  export const MessageSquare: Icon;
+  export const Building: Icon;
 }

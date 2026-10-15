@@ -2,14 +2,15 @@
  * Author: MD Shahed
  * Date: 2026-09-27
  * File Name: client/src/App.tsx
- * Modified Last: 2026-09-27
+ * Modified Last: 2026-10-15
  * Description: uofs student 4th year
  */
 
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Category, Internship, InternshipFilters, SystemHealth } from './types';
 import { fetchCategories, fetchFeaturedInternships, fetchInternships, fetchHealth } from './services/api';
+import { MOCK_CATEGORIES, MOCK_INTERNSHIPS } from './data/mockData';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -18,15 +19,37 @@ import { CareerPage } from './pages/CareerPage';
 import { JobDetailPage } from './pages/JobDetailPage';
 import { ApplyPage } from './pages/ApplyPage';
 import { ApplicationModal } from './components/ApplicationModal';
+import { ContactModal } from './components/ContactModal';
+
+// Smooth scroll for anchor links
+const ScrollToAnchor: React.FC = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]);
+
+  return null;
+};
 
 export const App: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [, setFeaturedInternships] = useState<Internship[]>([]);
   const [systemHealth, setSystemHealth] = useState<SystemHealth | null>(null);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   // Careers state
   const [internships, setInternships] = useState<Internship[]>([]);
-  const [isLoadingInternships, setIsLoadingInternships] = useState<boolean>(false);
+  const [isLoadingInternships, setIsLoadingInternships] = useState<boolean>(true);
   const [pagination, setPagination] = useState({ total: 0, page: 1, limit: 12, totalPages: 1 });
 
   // Filters State
@@ -45,30 +68,101 @@ export const App: React.FC = () => {
   // Applying Internship state for modal
   const [applyingInternship, setApplyingInternship] = useState<Internship | null>(null);
 
-  // Initial load
+  // Initial load - use mock data as fallback
   useEffect(() => {
     const loadSystem = async () => {
-      const [cats, featured, health] = await Promise.all([
-        fetchCategories(),
-        fetchFeaturedInternships(),
-        fetchHealth()
-      ]);
-      setCategories(cats);
-      setFeaturedInternships(featured);
-      setSystemHealth(health);
+      try {
+        const [cats, featured, health] = await Promise.all([
+          fetchCategories(),
+          fetchFeaturedInternships(),
+          fetchHealth()
+        ]);
+        // If API returns empty, use mock data
+        setCategories(cats.length > 0 ? cats : MOCK_CATEGORIES);
+        setFeaturedInternships(featured.length > 0 ? featured : MOCK_INTERNSHIPS.filter(i => i.is_featured));
+        setSystemHealth(health);
+      } catch {
+        // Fallback to mock data
+        setCategories(MOCK_CATEGORIES);
+        setFeaturedInternships(MOCK_INTERNSHIPS.filter(i => i.is_featured));
+        setSystemHealth({ status: 'demo', service: 'mainstay-api', database: 'disconnected', timestamp: new Date().toISOString() });
+      }
     };
     loadSystem();
   }, []);
 
-  // Fetch internships when filters change
+  // Fetch internships when filters change - with mock data fallback
   useEffect(() => {
     const loadInternships = async () => {
       setIsLoadingInternships(true);
-      const res = await fetchInternships({ ...filters, page: filters.page });
-      setInternships(res.data);
-      setPagination(res.pagination);
+
+      try {
+        const res = await fetchInternships({ ...filters, page: filters.page });
+
+        // If API returns data, use it
+        if (res.data.length > 0) {
+          setInternships(res.data);
+          setPagination(res.pagination);
+        } else {
+          // Use mock data with client-side filtering
+          useMockData();
+        }
+      } catch {
+        // Fallback to mock data
+        useMockData();
+      }
+
       setIsLoadingInternships(false);
     };
+
+    const useMockData = () => {
+      let filtered = [...MOCK_INTERNSHIPS];
+
+      // Apply filters
+      if (filters.search) {
+        const searchLower = filters.search.toLowerCase();
+        filtered = filtered.filter(i =>
+          i.title.toLowerCase().includes(searchLower) ||
+          i.company_name?.toLowerCase().includes(searchLower) ||
+          i.description.toLowerCase().includes(searchLower)
+        );
+      }
+
+      if (filters.category !== 'all') {
+        filtered = filtered.filter(i => i.category_slug === filters.category);
+      }
+
+      if (filters.work_type !== 'all') {
+        filtered = filtered.filter(i => i.work_type === filters.work_type);
+      }
+
+      if (filters.student_only) {
+        filtered = filtered.filter(i => i.is_student_position);
+      }
+
+      if (filters.company !== 'all') {
+        filtered = filtered.filter(i => i.company_name === filters.company);
+      }
+
+      // Sort
+      if (filters.sort_by === 'newest') {
+        filtered.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      }
+
+      // Paginate
+      const limit = 12;
+      const start = (filters.page - 1) * limit;
+      const paginatedData = filtered.slice(start, start + limit);
+
+      setInternships(paginatedData);
+      setPagination({
+        total: filtered.length,
+        page: filters.page,
+        limit,
+        totalPages: Math.ceil(filtered.length / limit)
+      });
+    };
+
     loadInternships();
   }, [filters]);
 
@@ -90,10 +184,17 @@ export const App: React.FC = () => {
     });
   };
 
+  const handleOpenContact = () => {
+    setIsContactModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-mainstay-700 selection:text-white">
+      {/* Smooth scroll handler */}
+      <ScrollToAnchor />
+
       {/* Navigation */}
-      <Navbar />
+      <Navbar onContactClick={handleOpenContact} />
 
       {/* Main Pages with Dedicated Routes */}
       <main className="flex-1">
@@ -101,7 +202,7 @@ export const App: React.FC = () => {
           {/* Home Route */}
           <Route
             path="/"
-            element={<HomePage systemHealth={systemHealth} />}
+            element={<HomePage systemHealth={systemHealth} onContactClick={handleOpenContact} />}
           />
 
           {/* About Route */}
@@ -164,12 +265,18 @@ export const App: React.FC = () => {
       </main>
 
       {/* Global Footer */}
-      <Footer />
+      <Footer onContactClick={handleOpenContact} />
 
       {/* Application Modal (Fallback) */}
       <ApplicationModal
         internship={applyingInternship}
         onClose={() => setApplyingInternship(null)}
+      />
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
       />
     </div>
   );

@@ -28,6 +28,7 @@ interface HomePageProps {
   systemHealth?: SystemHealth | null;
   onNavigateToAbout?: () => void;
   onNavigateToCareers?: (companyFilter?: string) => void;
+  onContactClick?: () => void;
 }
 
 interface Testimonial {
@@ -52,7 +53,7 @@ const TESTIMONIALS: Testimonial[] = [
   }
 ];
 
-export const HomePage: React.FC<HomePageProps> = () => {
+export const HomePage: React.FC<HomePageProps> = ({ onContactClick }) => {
   const [activeTestimonialIdx, setActiveTestimonialIdx] = useState(0);
 
   const nextTestimonial = () => {
@@ -481,13 +482,13 @@ export const HomePage: React.FC<HomePageProps> = () => {
             </div>
 
             <div className="shrink-0">
-              <Link
-                to="/careers"
-                className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#204f32] hover:bg-[#f2f7f4] rounded-lg text-sm font-bold shadow-lg transition-all group"
+              <button
+                onClick={onContactClick}
+                className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#204f32] hover:bg-[#f2f7f4] rounded-lg text-sm font-bold shadow-lg transition-all group cursor-pointer"
               >
                 <span>Contact Us</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+              </button>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
  * Author: MD Shahed
  * Date: 2026-09-27
  * File Name: client/tailwind.config.js
- * Modified Last: 2026-09-27
+ * Modified Last: 2026-10-15
  * Description: uofs student 4th year
  */
 
@@ -51,7 +51,37 @@ export default {
           900: '#122c1d',
           950: '#0b1a11',
         }
-      }
+      },
+      animation: {
+        'fadeIn': 'fadeIn 0.3s ease-out forwards',
+        'slideUp': 'slideUp 0.3s ease-out forwards',
+        'slideDown': 'slideDown 0.3s ease-out forwards',
+        'scaleIn': 'scaleIn 0.2s ease-out forwards',
+        'shimmer': 'shimmer 1.5s infinite',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideDown: {
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+      },
     },
   },
   plugins: [],

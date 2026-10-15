@@ -10,7 +10,11 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Search, ArrowRight } from 'lucide-react';
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  onContactClick?: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -80,13 +84,13 @@ export const Navbar: React.FC = () => {
               <Search className="w-4 h-4" />
             </Link>
 
-            <a
-              href="/#contact"
+            <button
+              onClick={onContactClick}
               className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#204f32] hover:bg-[#183b26] text-white rounded-full text-xs font-bold shadow-xs transition-all cursor-pointer group"
             >
               <span>Contact Us</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -145,14 +149,16 @@ export const Navbar: React.FC = () => {
             Careers
           </Link>
           <div className="pt-2">
-            <a
-              href="/#contact"
-              onClick={() => setIsMobileMenuOpen(false)}
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                onContactClick?.();
+              }}
               className="flex items-center justify-center gap-1.5 w-full py-2.5 bg-[#204f32] text-white rounded-lg text-sm font-bold shadow-xs"
             >
               <span>Contact Us</span>
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
           </div>
         </div>
       )}
