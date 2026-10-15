@@ -25,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
               <img
                 src="/MAINSTAY_Logo.jpg"
                 alt="Mainstay Logo"
-                className="h-8 w-auto object-contain brightness-0 invert opacity-95"
+                className="h-10 w-auto object-contain rounded"
               />
             </div>
             <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
