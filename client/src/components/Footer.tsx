@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
-                href="mailto:contact@mainstay.ca"
+                href="mailto:Contact@Mainstayreps.Com"
                 aria-label="Email"
                 className="w-8 h-8 rounded-full border border-white/20 hover:border-[#99c5b0] hover:text-[#99c5b0] flex items-center justify-center transition-colors"
               >
@@ -79,10 +79,16 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
 
           {/* Location (2 Cols) */}
           <div className="md:col-span-2">
-            <h4 className="text-white font-bold text-xs tracking-wider uppercase mb-3">Location</h4>
-            <div className="text-xs text-slate-400 space-y-1">
-              <div className="font-medium text-slate-300">Saskatoon, SK</div>
-              <div>Canada</div>
+            <h4 className="text-white font-bold text-xs tracking-wider uppercase mb-3">Contact</h4>
+            <div className="text-xs text-slate-400 space-y-2">
+              <div>
+                <div className="font-medium text-slate-300">602 48th Street East</div>
+                <div>Saskatoon, SK S7K 6K4</div>
+              </div>
+              <div className="text-slate-300">(306) 500-6269</div>
+              <a href="mailto:Contact@Mainstayreps.Com" className="hover:text-[#99c5b0] transition-colors">
+                Contact@Mainstayreps.Com
+              </a>
             </div>
           </div>
         </div>
