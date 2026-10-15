@@ -25,22 +25,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Left: Logo + Navigation Links */}
-          <div className="flex items-center gap-8">
-            {/* Logo */}
-            <Link
-              to="/"
-              className="flex items-center cursor-pointer group shrink-0"
-            >
-              <img
-                src="/MAINSTAY_Logo.jpg"
-                alt="Mainstay Logo"
-                className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
-              />
-            </Link>
+          {/* Left: Logo */}
+          <Link
+            to="/"
+            className="flex items-center cursor-pointer group shrink-0"
+          >
+            <img
+              src="/MAINSTAY_Logo.jpg"
+              alt="Mainstay Logo"
+              className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-105"
+            />
+          </Link>
 
-            {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-700">
+          {/* Right: Navigation Links + Contact Button (Desktop) */}
+          <div className="hidden md:flex items-center gap-8">
+            <nav className="flex items-center gap-6 text-sm font-semibold text-slate-700">
               <a
                 href="/#services"
                 className="hover:text-[#204f32] transition-colors"
@@ -73,10 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
                 Contact
               </button>
             </nav>
-          </div>
 
-          {/* Right: Contact Button (Desktop) */}
-          <div className="hidden md:flex items-center">
             <button
               onClick={onContactClick}
               className="px-5 py-2 bg-[#204f32] hover:bg-[#183b26] text-white rounded-lg text-sm font-bold shadow-sm transition-all cursor-pointer"
