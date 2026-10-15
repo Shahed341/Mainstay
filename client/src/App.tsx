@@ -15,6 +15,9 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
+import { ServicesPage } from './pages/ServicesPage';
+import { ExperiencePage } from './pages/ExperiencePage';
+import { NewsPage } from './pages/NewsPage';
 import { CareerPage } from './pages/CareerPage';
 import { JobDetailPage } from './pages/JobDetailPage';
 import { ApplyPage } from './pages/ApplyPage';
@@ -208,7 +211,25 @@ export const App: React.FC = () => {
           {/* About Route */}
           <Route
             path="/about"
-            element={<AboutPage />}
+            element={<AboutPage onContactClick={handleOpenContact} />}
+          />
+
+          {/* Services Route */}
+          <Route
+            path="/services"
+            element={<ServicesPage onContactClick={handleOpenContact} />}
+          />
+
+          {/* Experience Route */}
+          <Route
+            path="/experience"
+            element={<ExperiencePage onContactClick={handleOpenContact} />}
+          />
+
+          {/* News Route */}
+          <Route
+            path="/news"
+            element={<NewsPage />}
           />
 
           {/* Careers & Student Jobs Route */}

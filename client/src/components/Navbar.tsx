@@ -20,6 +20,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
 
   const isCareers = location.pathname.startsWith('/careers') || location.pathname.startsWith('/jobs');
   const isAbout = location.pathname.startsWith('/about');
+  const isServices = location.pathname.startsWith('/services');
+  const isExperience = location.pathname.startsWith('/experience');
+  const isNews = location.pathname.startsWith('/news');
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
@@ -40,13 +43,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
           {/* Right: Navigation Links + Contact Button (Desktop) */}
           <div className="hidden md:flex items-center gap-8">
             <nav className="flex items-center gap-6 text-sm font-semibold text-slate-700">
-              <a
-                href="/#services"
-                className="hover:text-[#204f32] transition-colors"
-              >
-                Services
-              </a>
-
               <Link
                 to="/about"
                 className={`transition-colors ${
@@ -54,6 +50,33 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
                 }`}
               >
                 About
+              </Link>
+
+              <Link
+                to="/services"
+                className={`transition-colors ${
+                  isServices ? 'text-[#204f32] font-bold' : 'hover:text-[#204f32]'
+                }`}
+              >
+                Services
+              </Link>
+
+              <Link
+                to="/experience"
+                className={`transition-colors ${
+                  isExperience ? 'text-[#204f32] font-bold' : 'hover:text-[#204f32]'
+                }`}
+              >
+                Experience
+              </Link>
+
+              <Link
+                to="/news"
+                className={`transition-colors ${
+                  isNews ? 'text-[#204f32] font-bold' : 'hover:text-[#204f32]'
+                }`}
+              >
+                News
               </Link>
 
               <Link
@@ -97,14 +120,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
       {/* Mobile Dropdown Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1 animate-slideDown">
-          <a
-            href="/#services"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold text-slate-700 hover:text-[#204f32] hover:bg-[#f2f7f4] transition-colors"
-          >
-            Services
-          </a>
-
           <Link
             to="/about"
             onClick={() => setIsMobileMenuOpen(false)}
@@ -113,6 +128,36 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
             }`}
           >
             About
+          </Link>
+
+          <Link
+            to="/services"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className={`block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold transition-colors ${
+              isServices ? 'bg-[#204f32] text-white' : 'text-slate-700 hover:text-[#204f32] hover:bg-[#f2f7f4]'
+            }`}
+          >
+            Services
+          </Link>
+
+          <Link
+            to="/experience"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className={`block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold transition-colors ${
+              isExperience ? 'bg-[#204f32] text-white' : 'text-slate-700 hover:text-[#204f32] hover:bg-[#f2f7f4]'
+            }`}
+          >
+            Experience
+          </Link>
+
+          <Link
+            to="/news"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className={`block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold transition-colors ${
+              isNews ? 'bg-[#204f32] text-white' : 'text-slate-700 hover:text-[#204f32] hover:bg-[#f2f7f4]'
+            }`}
+          >
+            News
           </Link>
 
           <Link
