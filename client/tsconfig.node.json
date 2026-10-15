@@ -1,0 +1,17 @@
+/*
+ * Author: MD Shahed
+ * Date: 2026-09-27
+ * File Name: client/tsconfig.node.json
+ * Modified Last: 2026-09-27
+ * Description: uofs student 4th year
+ */
+{
+  "compilerOptions": {
+    "composite": true,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["vite.config.ts"]
+}

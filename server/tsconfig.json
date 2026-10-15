@@ -1,0 +1,23 @@
+/*
+ * Author: MD Shahed
+ * Date: 2026-09-27
+ * File Name: server/tsconfig.json
+ * Modified Last: 2026-09-27
+ * Description: uofs student 4th year
+ */
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

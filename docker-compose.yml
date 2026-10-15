@@ -1,0 +1,82 @@
+# Author: MD Shahed
+# Date: 2026-09-27
+# File Name: docker-compose.yml
+# Modified Last: 2026-09-27
+# Description: uofs student 4th year
+
+services:
+  mysql_db:
+    image: mysql:8.0
+    container_name: mainstay_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-mainstay_db}
+      MYSQL_USER: ${MYSQL_USER:-mainstay_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-mainstay_password}
+    ports:
+      - "${DB_HOST_PORT:-3307}:3306"
+    volumes:
+      - mainstay_db_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - mainstay_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-rootpassword}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: mainstay_server
+    restart: unless-stopped
+    ports:
+      - "${SERVER_PORT:-5001}:${SERVER_PORT:-5001}"
+    environment:
+      PORT: ${SERVER_PORT:-5001}
+      DB_HOST: mysql_db
+      DB_PORT: 3306
+      DB_USER: ${MYSQL_USER:-mainstay_user}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-mainstay_password}
+      DB_NAME: ${MYSQL_DATABASE:-mainstay_db}
+      CLIENT_ORIGIN: http://localhost:${CLIENT_PORT:-5173}
+      NODE_ENV: development
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    networks:
+      - mainstay_network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: mainstay_client
+    restart: unless-stopped
+    ports:
+      - "${CLIENT_PORT:-5173}:5173"
+    environment:
+      VITE_API_BASE_URL: http://localhost:${SERVER_PORT:-5001}/api
+      CHOKIDAR_USEPOLLING: "true"
+      WATCHPACK_POLLING: "true"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - server
+    networks:
+      - mainstay_network
+
+volumes:
+  mainstay_db_data:
+
+networks:
+  mainstay_network:
+    driver: bridge
