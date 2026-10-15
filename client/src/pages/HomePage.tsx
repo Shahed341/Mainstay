@@ -460,12 +460,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onContactClick }) => {
       </section>
 
       {/* 7. LET'S WORK TOGETHER (CTA Section) */}
-      <section id="contact" className="relative py-16 sm:py-20 overflow-hidden bg-[#183b26]">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay"
-          style={{ backgroundImage: "url('/homepage/cta_bg.jpg')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#143422]/95 via-[#143422]/85 to-[#143422]/70" />
+      <section id="contact" className="py-16 sm:py-20 bg-[#183b26]">
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
