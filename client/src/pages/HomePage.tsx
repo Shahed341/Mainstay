@@ -232,7 +232,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onContactClick }) => {
               </Link>
             </div>
 
-            {/* 51% Stat and Buffalo River Logo */}
+            {/* 51% Stat */}
             <div className="pt-6 flex flex-wrap items-center gap-8 border-t border-white/20">
               <div>
                 <div className="text-4xl sm:text-5xl font-black text-white leading-none">51%</div>
@@ -244,11 +244,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onContactClick }) => {
               <div className="h-10 w-px bg-white/25 hidden sm:block" />
 
               <div className="flex items-center gap-3">
-                <img
-                  src="/homepage/buffalo_river_logo.png"
-                  alt="Buffalo River Dene Nation"
-                  className="h-10 w-auto object-contain brightness-0 invert opacity-90"
-                />
+                <span className="text-sm font-semibold text-white/80">Buffalo River Dene Nation</span>
               </div>
             </div>
           </div>
