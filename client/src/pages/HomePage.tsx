@@ -280,11 +280,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onContactClick }) => {
 
           {/* 3 Project Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Card 1 */}
+            {/* Card 1 - Mining */}
             <div className="group relative rounded-xl overflow-hidden shadow-sm hover:shadow-md border border-slate-200 transition-all cursor-pointer">
               <div className="h-56 overflow-hidden">
                 <img
-                  src="/homepage/project_mining.jpg"
+                  src="https://images.unsplash.com/photo-1578496479914-7ef3b0193be3?w=600&h=400&fit=crop"
                   alt="Mining Infrastructure Support"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
@@ -301,11 +301,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onContactClick }) => {
               </div>
             </div>
 
-            {/* Card 2 */}
+            {/* Card 2 - Industrial */}
             <div className="group relative rounded-xl overflow-hidden shadow-sm hover:shadow-md border border-slate-200 transition-all cursor-pointer">
               <div className="h-56 overflow-hidden">
                 <img
-                  src="/homepage/project_facility.jpg"
+                  src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=600&h=400&fit=crop"
                   alt="Industrial Facility Oversight"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
@@ -322,11 +322,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onContactClick }) => {
               </div>
             </div>
 
-            {/* Card 3 */}
+            {/* Card 3 - Energy */}
             <div className="group relative rounded-xl overflow-hidden shadow-sm hover:shadow-md border border-slate-200 transition-all cursor-pointer">
               <div className="h-56 overflow-hidden">
                 <img
-                  src="/homepage/project_energy.jpg"
+                  src="https://images.unsplash.com/photo-1513828583688-c52646db42da?w=600&h=400&fit=crop"
                   alt="Project Management Support"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
