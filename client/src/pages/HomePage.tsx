@@ -200,12 +200,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onContactClick }) => {
 
       {/* 3. OUR OWNERSHIP ("Proudly Indigenous-owned and community connected.") */}
       <section className="relative py-16 sm:py-24 bg-[#143422] text-white overflow-hidden">
-        {/* River Scenic Background Overlay */}
-        <div 
-          className="absolute inset-0 bg-cover bg-right opacity-45 mix-blend-luminosity pointer-events-none"
-          style={{ backgroundImage: "url('/homepage/indigenous_bg.jpg')" }}
+        {/* Indigenous Ownership Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-40 pointer-events-none"
+          style={{ backgroundImage: "url('/homepage/indigenous_own.png')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#143422] via-[#143422]/95 to-transparent w-full lg:w-3/5" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#143422] via-[#143422]/90 to-[#143422]/60 w-full" />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl space-y-6">
