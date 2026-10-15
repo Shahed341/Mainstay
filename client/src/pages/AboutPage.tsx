@@ -13,10 +13,9 @@ import { ArrowLeft, ArrowRight, Users, Target, Lightbulb, Handshake, Building2, 
 interface AboutPageProps {
   onBackToHome?: () => void;
   onExploreCareers?: () => void;
-  onContactClick?: () => void;
 }
 
-export const AboutPage: React.FC<AboutPageProps> = ({ onBackToHome, onExploreCareers, onContactClick }) => {
+export const AboutPage: React.FC<AboutPageProps> = ({ onBackToHome, onExploreCareers }) => {
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -201,12 +200,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onBackToHome, onExploreCar
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
 
-              <button
-                onClick={onContactClick}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white/40 text-white hover:bg-white/10 rounded-lg text-sm font-bold transition-all cursor-pointer"
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white/40 text-white hover:bg-white/10 rounded-lg text-sm font-bold transition-all"
               >
                 <span>Contact Us</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

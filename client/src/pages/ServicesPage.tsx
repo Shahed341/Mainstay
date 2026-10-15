@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, Wrench, Building, Zap, Calculator, Box, BarChart3, Users, Search, UserCheck } from 'lucide-react';
 
 interface ServiceItem {
@@ -80,11 +80,7 @@ const ENGINEERING_SERVICES: ServiceCategory[] = [
   }
 ];
 
-interface ServicesPageProps {
-  onContactClick?: () => void;
-}
-
-export const ServicesPage: React.FC<ServicesPageProps> = ({ onContactClick }) => {
+export const ServicesPage: React.FC = () => {
   const navigate = useNavigate();
   const [expandedService, setExpandedService] = useState<number | null>(null);
 
@@ -250,13 +246,13 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onContactClick }) =>
               </p>
             </div>
 
-            <button
-              onClick={onContactClick}
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#204f32] hover:bg-[#f2f7f4] rounded-lg text-sm font-bold shadow-lg transition-all group cursor-pointer"
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#204f32] hover:bg-[#f2f7f4] rounded-lg text-sm font-bold shadow-lg transition-all group"
             >
               <span>Contact Us</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </button>
+            </Link>
           </div>
         </div>
       </section>

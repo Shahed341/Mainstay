@@ -10,11 +10,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Linkedin, Mail } from 'lucide-react';
 
-interface FooterProps {
-  onContactClick?: () => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
+export const Footer: React.FC = () => {
   return (
     <footer className="bg-[#0b1a11] text-slate-300 text-sm border-t border-[#183b26]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -57,11 +53,11 @@ export const Footer: React.FC<FooterProps> = ({ onContactClick }) => {
             <h4 className="text-white font-bold text-xs tracking-wider uppercase mb-3">Quick Links</h4>
             <ul className="space-y-2 text-xs text-slate-400">
               <li><Link to="/" className="hover:text-[#99c5b0] transition-colors">Home</Link></li>
-              <li><a href="/#services" className="hover:text-[#99c5b0] transition-colors">Services</a></li>
-              <li><a href="/#projects" className="hover:text-[#99c5b0] transition-colors">Projects</a></li>
+              <li><Link to="/services" className="hover:text-[#99c5b0] transition-colors">Services</Link></li>
+              <li><Link to="/experience" className="hover:text-[#99c5b0] transition-colors">Experience</Link></li>
               <li><Link to="/about" className="hover:text-[#99c5b0] transition-colors">About</Link></li>
               <li><Link to="/careers" className="hover:text-[#99c5b0] transition-colors">Careers</Link></li>
-              <li><button onClick={onContactClick} className="hover:text-[#99c5b0] transition-colors">Contact</button></li>
+              <li><Link to="/contact" className="hover:text-[#99c5b0] transition-colors">Contact</Link></li>
             </ul>
           </div>
 

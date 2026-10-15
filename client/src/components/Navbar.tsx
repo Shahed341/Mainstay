@@ -10,11 +10,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
-interface NavbarProps {
-  onContactClick?: () => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
+export const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
@@ -23,6 +19,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
   const isServices = location.pathname.startsWith('/services');
   const isExperience = location.pathname.startsWith('/experience');
   const isNews = location.pathname.startsWith('/news');
+  const isContact = location.pathname.startsWith('/contact');
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
@@ -87,21 +84,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
               >
                 Careers
               </Link>
-
-              <button
-                onClick={onContactClick}
-                className="hover:text-[#204f32] transition-colors cursor-pointer"
-              >
-                Contact
-              </button>
             </nav>
 
-            <button
-              onClick={onContactClick}
-              className="px-5 py-2 bg-[#204f32] hover:bg-[#183b26] text-white rounded-lg text-sm font-bold shadow-sm transition-all cursor-pointer"
+            <Link
+              to="/contact"
+              className={`px-5 py-2 rounded-lg text-sm font-bold shadow-sm transition-all ${
+                isContact
+                  ? 'bg-[#183b26] text-white'
+                  : 'bg-[#204f32] hover:bg-[#183b26] text-white'
+              }`}
             >
-              Get in Touch
-            </button>
+              Contact Us
+            </Link>
           </div>
 
           {/* Mobile: Hamburger Menu */}
@@ -170,26 +164,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onContactClick }) => {
             Careers
           </Link>
 
-          <button
-            onClick={() => {
-              setIsMobileMenuOpen(false);
-              onContactClick?.();
-            }}
-            className="block w-full text-left px-4 py-3 rounded-lg text-sm font-semibold text-slate-700 hover:text-[#204f32] hover:bg-[#f2f7f4] transition-colors"
-          >
-            Contact
-          </button>
-
           <div className="pt-3 px-4">
-            <button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                onContactClick?.();
-              }}
-              className="w-full py-3 bg-[#204f32] hover:bg-[#183b26] text-white rounded-lg text-sm font-bold shadow-sm transition-all"
+            <Link
+              to="/contact"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="block w-full py-3 bg-[#204f32] hover:bg-[#183b26] text-white rounded-lg text-sm font-bold shadow-sm transition-all text-center"
             >
-              Get in Touch
-            </button>
+              Contact Us
+            </Link>
           </div>
         </div>
       )}

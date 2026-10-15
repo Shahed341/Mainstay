@@ -6,8 +6,8 @@
  */
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, MapPin, Briefcase, DollarSign } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { ArrowLeft, MapPin, Briefcase } from 'lucide-react';
 
 interface Project {
   company: string;
@@ -104,11 +104,7 @@ const PROJECTS: Project[] = [
   }
 ];
 
-interface ExperiencePageProps {
-  onContactClick?: () => void;
-}
-
-export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onContactClick }) => {
+export const ExperiencePage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
@@ -213,12 +209,12 @@ export const ExperiencePage: React.FC<ExperiencePageProps> = ({ onContactClick }
           <p className="text-slate-200 mb-8">
             Let's discuss how Mainstay can support your next project.
           </p>
-          <button
-            onClick={onContactClick}
-            className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#204f32] hover:bg-[#f2f7f4] rounded-lg text-sm font-bold shadow-lg transition-all cursor-pointer"
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#204f32] hover:bg-[#f2f7f4] rounded-lg text-sm font-bold shadow-lg transition-all"
           >
             Contact Us
-          </button>
+          </Link>
         </div>
       </section>
     </div>

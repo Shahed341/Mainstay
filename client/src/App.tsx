@@ -18,11 +18,11 @@ import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { ExperiencePage } from './pages/ExperiencePage';
 import { NewsPage } from './pages/NewsPage';
+import { ContactPage } from './pages/ContactPage';
 import { CareerPage } from './pages/CareerPage';
 import { JobDetailPage } from './pages/JobDetailPage';
 import { ApplyPage } from './pages/ApplyPage';
 import { ApplicationModal } from './components/ApplicationModal';
-import { ContactModal } from './components/ContactModal';
 
 // Smooth scroll for anchor links
 const ScrollToAnchor: React.FC = () => {
@@ -48,7 +48,6 @@ export const App: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [, setFeaturedInternships] = useState<Internship[]>([]);
   const [systemHealth, setSystemHealth] = useState<SystemHealth | null>(null);
-  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   // Careers state
   const [internships, setInternships] = useState<Internship[]>([]);
@@ -187,17 +186,13 @@ export const App: React.FC = () => {
     });
   };
 
-  const handleOpenContact = () => {
-    setIsContactModalOpen(true);
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-mainstay-700 selection:text-white">
       {/* Smooth scroll handler */}
       <ScrollToAnchor />
 
       {/* Navigation */}
-      <Navbar onContactClick={handleOpenContact} />
+      <Navbar />
 
       {/* Main Pages with Dedicated Routes */}
       <main className="flex-1">
@@ -205,31 +200,37 @@ export const App: React.FC = () => {
           {/* Home Route */}
           <Route
             path="/"
-            element={<HomePage systemHealth={systemHealth} onContactClick={handleOpenContact} />}
+            element={<HomePage systemHealth={systemHealth} />}
           />
 
           {/* About Route */}
           <Route
             path="/about"
-            element={<AboutPage onContactClick={handleOpenContact} />}
+            element={<AboutPage />}
           />
 
           {/* Services Route */}
           <Route
             path="/services"
-            element={<ServicesPage onContactClick={handleOpenContact} />}
+            element={<ServicesPage />}
           />
 
           {/* Experience Route */}
           <Route
             path="/experience"
-            element={<ExperiencePage onContactClick={handleOpenContact} />}
+            element={<ExperiencePage />}
           />
 
           {/* News Route */}
           <Route
             path="/news"
             element={<NewsPage />}
+          />
+
+          {/* Contact Route */}
+          <Route
+            path="/contact"
+            element={<ContactPage />}
           />
 
           {/* Careers & Student Jobs Route */}
@@ -286,18 +287,12 @@ export const App: React.FC = () => {
       </main>
 
       {/* Global Footer */}
-      <Footer onContactClick={handleOpenContact} />
+      <Footer />
 
       {/* Application Modal (Fallback) */}
       <ApplicationModal
         internship={applyingInternship}
         onClose={() => setApplyingInternship(null)}
-      />
-
-      {/* Contact Modal */}
-      <ContactModal
-        isOpen={isContactModalOpen}
-        onClose={() => setIsContactModalOpen(false)}
       />
     </div>
   );
